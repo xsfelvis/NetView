@@ -2,7 +2,6 @@
 <resources>
     <declare-styleable name="netView">
         <attr name="netColor" format="color"/>
-        <attr name="pointColor" format="color"/>
         <attr name="overlayColor" format="color"/>
         <attr name="textColor" format="color"/>
         <attr name="overlayAlpha" format="integer"/>
