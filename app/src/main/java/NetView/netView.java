@@ -29,7 +29,7 @@ public class netView extends View {
     private int overlayalpha;
     private int tagsize;
 
-    private NetViewAttr netViewAttr;
+    private netViewAttrs netViewAttr;
 
 
     private Paint netPaint;
@@ -49,7 +49,7 @@ public class netView extends View {
 
     public netView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
-        netViewAttr = new NetViewAttr(context, attrs, defStyleAttr);
+        netViewAttr = new netViewAttrs(context, attrs, defStyleAttr);
         init(context);
     }
 
@@ -112,25 +112,9 @@ public class netView extends View {
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
         drawNet(canvas);
-        //drawLine(canvas);
-
         drawText(canvas);
         drawRegion(canvas);
     }
-
-    private void drawLine(Canvas canvas) {
-        Path path = new Path();
-        for (int i = 0; i < count + 1; i++) {
-            path.reset();
-            path.moveTo(centerX, centerY);
-            float x = (float) (centerX + radius * Math.cos(angle * i));
-            float y = (float) (centerY + radius * Math.sin(angle * i));
-            path.lineTo(x, y);
-            canvas.drawPath(path, netPaint);
-        }
-
-    }
-
 
     private void drawNet(Canvas canvas) {
         //绘制六边形
@@ -217,6 +201,7 @@ public class netView extends View {
      */
     public void setTitles(String[] titles) {
         this.titles = titles;
+
     }
 
     /**
@@ -226,6 +211,7 @@ public class netView extends View {
      */
     public void setPercent(double[] data) {
         this.data = data;
+
     }
 
 
