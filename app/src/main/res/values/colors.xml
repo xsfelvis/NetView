@@ -17,4 +17,9 @@
     <color name="slategray">#ff708090</color>
     <color name="slategrey">#ff708090</color>
 
+    <color name="honeydew">#fff0fff0</color>
+    <color name="hotpink">#ffff69b4</color>
+    <color name="indianred">#ffcd5c5c</color>
+    <color name="indigo">#ff4b0082</color>
+
 </resources>
