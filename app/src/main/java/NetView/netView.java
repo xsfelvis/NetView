@@ -57,7 +57,6 @@ public class netView extends View {
     private void init(Context context) {
         count = Math.min(data.length, titles.length);
 
-
         netColor = netViewAttr.getNetColor();
         overlayColor = netViewAttr.getOverlayColor();
         textColor = netViewAttr.getTextColor();
