@@ -18,9 +18,6 @@ public class netViewAttrs {
     private int overlayAlpha;
     private int tagsize;
 
-
-
-
     public netViewAttrs(Context context, AttributeSet attrs, int defStyleAttr) {
         TypedArray ta = context.obtainStyledAttributes(attrs, R.styleable.netView, defStyleAttr, 0);
         netColor = ta.getColor(R.styleable.netView_netColor, context.getResources().getColor(R.color.slategray));
