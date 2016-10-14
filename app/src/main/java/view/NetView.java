@@ -7,19 +7,21 @@ import android.graphics.Path;
 import android.util.AttributeSet;
 import android.view.View;
 
+import util.NetMathUtil;
+
 /**
  * @author xushangfei
  * @time Created at 2016/3/12.
  * @email xsf_uestc_ncl@163.com
  */
 public class NetView extends View {
-    private int count = 4;
+    private int count = 5;
     private float angle = (float) (Math.PI * 2 / count);
     private float radius;  //外接圆半径
     private int centerX;
     private int centerY;
-    private String[] titles = {"A", "B", "C", "D"};
-    private double[] data = {1, 0.30, 0.6, 0.5};
+    private String[] titles = {"A", "B", "C", "D" ,"E"};
+    private double[] data = {1, 0.30, 0.6, 0.5, 0.7};
 
 
     private int netColor;
@@ -118,33 +120,45 @@ public class NetView extends View {
     private void drawNet(Canvas canvas) {
         //绘制六边形
         Path path = new Path();
-        float r = radius / (count - 1); //每次递增的高度
-        for (int i = 0; i < count; i++) {
-            float currentRadius = r * i;
+//        float r = radius / (count - 1); //每次递增的高度
+        int density = 4;
+        float deltaR = radius / density;
+        for (int i = 1;i <= density;i++) {
+            float currentR = deltaR * i;
+            float currentAngle;
             path.reset();
-            for (int j = 0; j < count; j++) {
-                if (j == 0) {
-                    path.moveTo(centerX + currentRadius, centerY);
-                } else {
-                    float x = (float) (centerX + currentRadius * Math.cos(angle * j));
-                    float y = (float) (centerY + currentRadius * Math.sin(angle * j));
-                    path.lineTo(x, y);
-                }
+            if (count % 2 == 0) {
+                currentAngle = (float) (1.5 * Math.PI + Math.PI / count);
+            } else {
+                currentAngle = (float) (1.5 * Math.PI);
             }
-
+            path.moveTo(centerX + NetMathUtil.getXFromRAlpha(currentR, currentAngle),
+                    centerY + NetMathUtil.getYFromRAlpha(currentR,currentAngle));
+            for (int j = 1; j < count; j++) {
+                currentAngle += angle;
+                path.lineTo(centerX + NetMathUtil.getXFromRAlpha(currentR, currentAngle),
+                        centerY + NetMathUtil.getYFromRAlpha(currentR,currentAngle));
+            }
             path.close();
-            canvas.drawPath(path, netPaint);
+            canvas.drawPath(path,netPaint);
         }
 
 
         //绘制轴线
-        for (int i = 1; i < count + 1; i++) {
+        float currentAngle;
+        if (count % 2 == 0) {
+            currentAngle = (float) (1.5 * Math.PI + Math.PI / count);
+        } else {
+            currentAngle = (float) (1.5 * Math.PI);
+        }
+        for (int i = 0; i < count; i++) {
             path.reset();
             path.moveTo(centerX, centerY);
-            float x = (float) (centerX + radius * Math.cos(angle * i));
-            float y = (float) (centerY + radius * Math.sin(angle * i));
+            float x = (float) (centerX + NetMathUtil.getXFromRAlpha(radius,currentAngle));
+            float y = (float) (centerY + NetMathUtil.getYFromRAlpha(radius,currentAngle));
             path.lineTo(x, y);
             canvas.drawPath(path, netPaint);
+            currentAngle += angle;
         }
 
     }
@@ -154,36 +168,50 @@ public class NetView extends View {
         float fontHeight = fontMetrics.descent - fontMetrics.ascent; //文字的高度
 
         //修正标题
+        float currentAngle;
+        if (count % 2 == 0) {
+            currentAngle = (float) (1.5 * Math.PI + Math.PI / count);
+        } else {
+            currentAngle = (float) (1.5 * Math.PI);
+        }
 
         for (int i = 0; i < count; i++) {
-            float x = (float) (centerX + (radius + fontHeight / 2) * Math.cos(angle * i));
-            float y = (float) (centerY + (radius + fontHeight / 2) * Math.sin(angle * i));
+            currentAngle %= Math.PI * 2;
+            float x = (float) (centerX + NetMathUtil.getXFromRAlpha(radius + fontHeight / 2, currentAngle));
+            float y = (float) (centerY + NetMathUtil.getYFromRAlpha(radius + fontHeight / 2, currentAngle));
             float dis = textPaint.measureText(titles[i]);//获取文本长度
 
-            if (angle * i > 0 && angle * i < Math.PI) {
+            if (currentAngle > 0 && currentAngle < Math.PI) {
                 canvas.drawText(titles[i], x-dis/2, y+fontHeight , textPaint);
-            } else if (angle * i >= Math.PI && angle * i < 3 * Math.PI / 2) {
+            } else if (currentAngle >= Math.PI && currentAngle < 3 * Math.PI / 2) {
                 canvas.drawText(titles[i], x - dis, y, textPaint);
             } else {
                 canvas.drawText(titles[i], x, y, textPaint);
             }
-
+            currentAngle += angle;
         }
 
     }
 
 
     private void drawRegion(Canvas canvas) {
+        float currentAngle;
+        if (count % 2 == 0) {
+            currentAngle = (float) (1.5 * Math.PI + Math.PI / count);
+        } else {
+            currentAngle = (float) (1.5 * Math.PI);
+        }
         Path path = new Path();
         for (int i = 0; i < count; i++) {
-            float x = (float) (centerX + radius * Math.cos(angle * i) * data[i]);
-            float y = (float) (centerY + radius * Math.sin(angle * i) * data[i]);
+            float x = centerX + NetMathUtil.getXFromRAlpha((float) (radius * data[i]), currentAngle);
+            float y = centerY + NetMathUtil.getYFromRAlpha((float) (radius * data[i]), currentAngle);
             if (i == 0) {
-                path.moveTo(x, centerY);
+                path.moveTo(x, y);
             } else {
                 path.lineTo(x, y);
             }
             canvas.drawCircle(x, y, 5, valuePaint);
+            currentAngle += angle;
         }
         path.close();
         valuePaint.setAlpha(overlayalpha);

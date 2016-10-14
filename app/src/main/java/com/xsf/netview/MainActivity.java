@@ -7,8 +7,8 @@ import view.NetView;
 
 public class MainActivity extends AppCompatActivity {
     private NetView netView;
-    private String[] titles = {"android", "javascript", "java", "python"};
-    private double[] percent = {1, 0.4, 0.6, 0.5};
+    private String[] titles = {"android", "javascript", "java", "python", "c++"};
+    private double[] percent = {1, 0.4, 0.6, 0.5, 0.7};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
