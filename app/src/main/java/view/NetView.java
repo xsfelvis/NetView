@@ -1,4 +1,4 @@
-package NetView;
+package view;
 
 import android.content.Context;
 import android.graphics.Canvas;
@@ -12,14 +12,14 @@ import android.view.View;
  * @time Created at 2016/3/12.
  * @email xsf_uestc_ncl@163.com
  */
-public class netView extends View {
-    private int count = 6;
+public class NetView extends View {
+    private int count = 4;
     private float angle = (float) (Math.PI * 2 / count);
     private float radius;  //外接圆半径
     private int centerX;
     private int centerY;
-    private String[] titles = {"A", "B", "C", "D", "E", "F"};
-    private double[] data = {1, 0.30, 0.6, 0.5, 0.8, 0.2};
+    private String[] titles = {"A", "B", "C", "D"};
+    private double[] data = {1, 0.30, 0.6, 0.5};
 
 
     private int netColor;
@@ -29,7 +29,7 @@ public class netView extends View {
     private int overlayalpha;
     private int tagsize;
 
-    private netViewAttrs netViewAttr;
+    private NetViewAttrs netViewAttr;
 
 
     private Paint netPaint;
@@ -37,19 +37,19 @@ public class netView extends View {
     private Paint textPaint;
 
 
-    public netView(Context context) {
+    public NetView(Context context) {
         this(context, null);
         init(context);
     }
 
-    public netView(Context context, AttributeSet attrs) {
+    public NetView(Context context, AttributeSet attrs) {
         this(context, attrs, 0);
         init(context);
     }
 
-    public netView(Context context, AttributeSet attrs, int defStyleAttr) {
+    public NetView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
-        netViewAttr = new netViewAttrs(context, attrs, defStyleAttr);
+        netViewAttr = new NetViewAttrs(context, attrs, defStyleAttr);
         init(context);
     }
 

@@ -8,7 +8,7 @@
     android:gravity="center"
     tools:context="com.xsf.netview.MainActivity">
 
-    <NetView.netView
+    <view.NetView
         android:id="@+id/netView"
         NetView:netColor="@color/colorPrimaryDark"
         NetView:overlayColor="@color/Yellow"

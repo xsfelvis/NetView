@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <declare-styleable name="netView">
+    <declare-styleable name="NetView">
         <attr name="netColor" format="color"/>
         <attr name="overlayColor" format="color"/>
         <attr name="textColor" format="color"/>

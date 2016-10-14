@@ -1,4 +1,4 @@
-package NetView;
+package view;
 
 import android.content.Context;
 import android.content.res.TypedArray;
@@ -11,20 +11,20 @@ import com.xsf.netview.R;
  * @time Created at 2016/3/12.
  * @email xsf_uestc_ncl@163.com
  */
-public class netViewAttrs {
+public class NetViewAttrs {
     private int netColor;
     private int overlayColor;
     private int textColor;
     private int overlayAlpha;
     private int tagsize;
 
-    public netViewAttrs(Context context, AttributeSet attrs, int defStyleAttr) {
-        TypedArray ta = context.obtainStyledAttributes(attrs, R.styleable.netView, defStyleAttr, 0);
-        netColor = ta.getColor(R.styleable.netView_netColor, context.getResources().getColor(R.color.slategray));
-        overlayAlpha = ta.getInteger(R.styleable.netView_overlayAlpha, 130);
-        tagsize = ta.getInteger(R.styleable.netView_tagsize, 20);
-        overlayColor = ta.getColor(R.styleable.netView_overlayColor, context.getResources().getColor(R.color.colorPrimaryDark));
-        textColor = ta.getColor(R.styleable.netView_textColor, context.getResources().getColor(R.color.skyblue));
+    public NetViewAttrs(Context context, AttributeSet attrs, int defStyleAttr) {
+        TypedArray ta = context.obtainStyledAttributes(attrs, R.styleable.NetView, defStyleAttr, 0);
+        netColor = ta.getColor(R.styleable.NetView_netColor, context.getResources().getColor(R.color.slategray));
+        overlayAlpha = ta.getInteger(R.styleable.NetView_overlayAlpha, 130);
+        tagsize = ta.getInteger(R.styleable.NetView_tagsize, 20);
+        overlayColor = ta.getColor(R.styleable.NetView_overlayColor, context.getResources().getColor(R.color.colorPrimaryDark));
+        textColor = ta.getColor(R.styleable.NetView_textColor, context.getResources().getColor(R.color.skyblue));
         ta.recycle();
     }
 
