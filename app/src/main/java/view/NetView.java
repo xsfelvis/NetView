@@ -15,13 +15,13 @@ import util.NetMathUtil;
  * @email xsf_uestc_ncl@163.com
  */
 public class NetView extends View {
-    private int count = 5;
-    private float angle = (float) (Math.PI * 2 / count);
+    private int count;
+    private float angle;
     private float radius;  //外接圆半径
     private int centerX;
     private int centerY;
-    private String[] titles = {"A", "B", "C", "D" ,"E"};
-    private double[] data = {1, 0.30, 0.6, 0.5, 0.7};
+    private String[] titles;
+    private double[] data;
 
 
     private int netColor;
@@ -57,13 +57,13 @@ public class NetView extends View {
 
 
     private void init(Context context) {
-        count = Math.min(data.length, titles.length);
-
         netColor = netViewAttr.getNetColor();
         overlayColor = netViewAttr.getOverlayColor();
         textColor = netViewAttr.getTextColor();
         overlayalpha = netViewAttr.getOverlayAlpha();
         tagsize = netViewAttr.getTagsize();
+        count = netViewAttr.getTitleCount();
+        angle = (float) (Math.PI * 2 / count);
 
         netPaint = new Paint();
         netPaint.setAntiAlias(true);
@@ -111,7 +111,6 @@ public class NetView extends View {
 
     @Override
     protected void onDraw(Canvas canvas) {
-        super.onDraw(canvas);
         drawNet(canvas);
         drawText(canvas);
         drawRegion(canvas);
@@ -228,7 +227,11 @@ public class NetView extends View {
      */
     public void setTitles(String[] titles) {
         this.titles = titles;
-
+        int len = titles.length;
+        if (len > count) {
+            count = len;
+            angle = (float) (Math.PI * 2 / count);
+        }
     }
 
     /**
@@ -238,6 +241,11 @@ public class NetView extends View {
      */
     public void setPercent(double[] data) {
         this.data = data;
+        int len =data.length;
+        if (len > count) {
+            count = len;
+            angle = (float) (Math.PI * 2 / count);
+        }
 
     }
 

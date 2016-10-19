@@ -14,6 +14,7 @@
         NetView:overlayColor="@color/Yellow"
         NetView:textColor="@color/sienna"
         NetView:tagsize="20"
+        NetView:title_count="5"
         android:layout_width="300dp"
         android:layout_height="match_parent"/>
 </LinearLayout>

@@ -17,6 +17,7 @@ public class NetViewAttrs {
     private int textColor;
     private int overlayAlpha;
     private int tagsize;
+    private int titleCount;
 
     public NetViewAttrs(Context context, AttributeSet attrs, int defStyleAttr) {
         TypedArray ta = context.obtainStyledAttributes(attrs, R.styleable.NetView, defStyleAttr, 0);
@@ -25,6 +26,7 @@ public class NetViewAttrs {
         tagsize = ta.getInteger(R.styleable.NetView_tagsize, 20);
         overlayColor = ta.getColor(R.styleable.NetView_overlayColor, context.getResources().getColor(R.color.colorPrimaryDark));
         textColor = ta.getColor(R.styleable.NetView_textColor, context.getResources().getColor(R.color.skyblue));
+        titleCount = ta.getInteger(R.styleable.NetView_title_count,6);
         ta.recycle();
     }
 
@@ -48,4 +50,6 @@ public class NetViewAttrs {
     public int getOverlayColor() {
         return overlayColor;
     }
+
+    public int getTitleCount() { return titleCount; }
 }
