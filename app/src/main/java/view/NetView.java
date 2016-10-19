@@ -7,6 +7,8 @@ import android.graphics.Path;
 import android.util.AttributeSet;
 import android.view.View;
 
+import java.util.Map;
+
 import util.NetMathUtil;
 
 /**
@@ -22,6 +24,7 @@ public class NetView extends View {
     private int centerY;
     private String[] titles;
     private double[] data;
+    private Map<String, Double> mMapData;
 
 
     private int netColor;
@@ -99,7 +102,7 @@ public class NetView extends View {
         int widthSpecSize =MeasureSpec.getSize(widthMeasureSpec);
         int heighSpecMode = MeasureSpec.getMode(heightMeasureSpec);
         int heighSpecSize =MeasureSpec.getSize(heightMeasureSpec);
-        if(widthSpecMode==MeasureSpec.AT_MOST&&heighSpecMode==MeasureSpec.AT_MOST){
+        if(widthSpecMode==MeasureSpec.AT_MOST && heighSpecMode==MeasureSpec.AT_MOST){
             setMeasuredDimension(200,200);
         }else if(widthSpecMode==MeasureSpec.AT_MOST){
             setMeasuredDimension(200,heighSpecSize);
@@ -219,34 +222,19 @@ public class NetView extends View {
 
     }
 
+    public void setData(Map<String,Double> map) {
+        mMapData = map;
+        count = map.size();
+        angle = (float) (Math.PI * 2 / count);
+        titles = new String[count];
+        data = new double[count];
+        int i = 0;
 
-    /**
-     * 设置网状线角标
-     *
-     * @param titles
-     */
-    public void setTitles(String[] titles) {
-        this.titles = titles;
-        int len = titles.length;
-        if (len > count) {
-            count = len;
-            angle = (float) (Math.PI * 2 / count);
+        for (String str : map.keySet()) {
+            titles[i] = str;
+            data[i++] = map.get(str);
         }
-    }
-
-    /**
-     * 设置绘制区域的占比
-     *
-     * @param data
-     */
-    public void setPercent(double[] data) {
-        this.data = data;
-        int len =data.length;
-        if (len > count) {
-            count = len;
-            angle = (float) (Math.PI * 2 / count);
-        }
-
+        postInvalidate();
     }
 
 
