@@ -23,7 +23,8 @@ public class NetViewAttrs {
         TypedArray ta = context.obtainStyledAttributes(attrs, R.styleable.NetView, defStyleAttr, 0);
         netColor = ta.getColor(R.styleable.NetView_netColor, context.getResources().getColor(R.color.slategray));
         overlayAlpha = ta.getInteger(R.styleable.NetView_overlayAlpha, 130);
-        tagsize = ta.getInteger(R.styleable.NetView_tagsize, 20);
+        tagsize = ta.getDimensionPixelSize(R.styleable.NetView_tagsize, 20);
+
         overlayColor = ta.getColor(R.styleable.NetView_overlayColor, context.getResources().getColor(R.color.colorPrimaryDark));
         textColor = ta.getColor(R.styleable.NetView_textColor, context.getResources().getColor(R.color.skyblue));
         titleCount = ta.getInteger(R.styleable.NetView_title_count,6);

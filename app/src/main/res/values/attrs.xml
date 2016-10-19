@@ -5,7 +5,7 @@
         <attr name="overlayColor" format="color"/>
         <attr name="textColor" format="color"/>
         <attr name="overlayAlpha" format="integer"/>
-        <attr name="tagsize" format="integer"/>
+        <attr name="tagsize" format="dimension"/>
         <attr name="title_count" format="integer"/>
     </declare-styleable>
 
